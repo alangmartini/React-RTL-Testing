@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Pokedex from '../pages/Pokedex';
 import renderWithRouter from '../renderWithRouter';
@@ -14,9 +14,8 @@ const fetchPokemonTypes = () => [...new Set(pokemonList
   .reduce((types, { type }) => [...types, type], []))];
 
 describe('Tests Pokedex page', () => {
-  let wrapper;
   beforeEach(() => {
-    wrapper = renderWithRouter(<Pokedex
+    renderWithRouter(<Pokedex
       pokemonList={ pokemonList }
       isPokemonFavoriteById={ favoritePokemons }
     />);
@@ -65,10 +64,6 @@ describe('Tests Pokedex page', () => {
     });
   });
   test('If pokemon card has a reset filter button', () => {
-    const filterPokemon = (filteredType) => {
-      this.setState({ filteredType, pokemonIndex: 0 });
-    };
-
     const allButton = screen.getByRole('button', { name: /All/ });
     expect(allButton).toBeVisible();
 
